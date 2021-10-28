@@ -1,0 +1,29 @@
+<%- include("header") -%>
+
+  <div class="box" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+<!-- display the list items -->
+  <div class="box">
+  <%  newListItems.forEach(function(item){ %>
+    <form action="/delete" method="post">
+      <div class="item">
+        <!-- we added name, value and onChange to help us delete the item when we checked it. -->
+        <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()">
+        <p><%=item.name%></p>
+      </div>
+      <!-- added this to help us getting the list name on adding and deleting -->
+      <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+    </form>
+  <%  }) %>
+
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <!-- added value to get the list name when we submit so we can add items -->
+        <button type="submit" name="list" value="<%= listTitle %>">+</button>
+      </form>
+  </div>
+
+<%- include("footer") -%>
